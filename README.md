@@ -2,14 +2,14 @@
 
 ## Các kiến thức đã thực hành
 
-Trong quá trình thực hành bài lab CCNA, tôi đã triển khai và cấu hình các nội dung sau:
+Bài lab mô phỏng một hệ thông mạng doanh nghiệp được triển khai và cấu hình các nội dung sau:
 
 ---
 
 ### 1. Cấu hình VLAN với Router-on-a-Stick và VTP
 
 - **Router-on-a-Stick**:
-  - Sử dụng một cổng trunk trên router để định tuyến giữa các VLAN.
+  - Cấu hình cổng trunk trên router để định tuyến giữa các VLAN.
   - Tạo các sub-interface trên router với `encapsulation dot1q`.
   - Gán IP cho từng sub-interface tương ứng với các VLAN.
 
@@ -22,22 +22,17 @@ Trong quá trình thực hành bài lab CCNA, tôi đã triển khai và cấu h
 
 ### 2. Cấu hình Static Route và OSPF
 
-- **Static Routing**:
-  - Thiết lập tuyến tĩnh giữa các mạng không cùng router.
-  - Sử dụng lệnh `ip route` để định tuyến thủ công.
-
-- **OSPF (Open Shortest Path First)**:
-  - Cấu hình OSPF liên vùng giữa các router.
-  - Sử dụng `router ospf` và các `network` để quảng bá mạng.
-  - Kiểm tra quan hệ láng giềng (neighbor) và bảng định tuyến OSPF.
+- Cấu hình OSPF cho các Vùng mạng được chỉ định trong bài lab.
+- Cấu hình Static route cho 2 vùng mạng lan thông qua tunnel0(sử dụng khi thiết lập VPN-GRE)
+- Cấu hình default route cho các gói tin đi từ các mạng lan ra ngoài internet.
+- kết hợp OSPF và static route bằng **default-infomation oringinate**.
 
 ---
 
 ### 3. Cấu hình HSRP (Hot Standby Router Protocol)
 
-- Thiết lập **HSRP** giữa hai router để đảm bảo tính sẵn sàng cao.
+- Thiết lập **HSRP** giữa hai router trong vùng lan chứa các Server để đảm bảo tính sẵn sàng cao.
 - Cấu hình địa chỉ IP ảo cho gateway mặc định.
-- Thử nghiệm failover: tắt router chính để kiểm tra chuyển đổi sang router dự phòng.
 
 ---
 
@@ -50,13 +45,19 @@ Trong quá trình thực hành bài lab CCNA, tôi đã triển khai và cấu h
 
 ---
 
-### 5. Cấu hình NAT Static và ACLs (Access Control Lists)
+### 5. Cấu hình DNS và DHCP
+
+- Cấu hình, tạo các A Record cho các DNS Server.
+- Thực hiện cấu hình DHCP Server trên các Router để thực hiện quá trình cấp IP động đến các máy trong các Vlan.
+
+---
+
+### 6. Cấu hình NAT Static và ACLs (Access Control Lists)
 
 - **Static NAT**:
-  - Ánh xạ địa chỉ IP riêng (Private IP) với IP công cộng (Public IP).
+  - Ánh xạ địa chỉ IP riêng (Private IP) của các Server thành các IP công cộng (Public IP).
   - Kiểm tra khả năng truy cập từ bên ngoài vào bên trong mạng.
 
 - **ACLs**:
   - Tạo danh sách điều khiển truy cập để lọc lưu lượng mạng.
-  - Ứng dụng vào việc bảo mật, giới hạn truy cập giữa các mạng hoặc dịch vụ cụ thể.
   - Kết hợp ACL với NAT để kiểm soát lưu lượng phù hợp.
